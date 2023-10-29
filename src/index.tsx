@@ -7,6 +7,7 @@ import Statistics from "./components/statistics/Statistics";
 import SideBar from "./components/sidebar/SideBar";
 import { onMount } from "solid-js";
 import { SectionsEnum, setCurrentDay, setCurrentSection } from "./sharedSignals";
+import DBConfig from "./components/DBConfig/DBConfig";
 
 onMount(() => {
   const temp = new Date();
@@ -18,7 +19,7 @@ render(() =>
   <Router>
     <SideBar />
     <Routes>
-      <Route path="/" element={<Attendance />} />
+      <Route path="/" element={<DBConfig />} />
       <Route path="/statistics" element={<Statistics />} />
       <Route path="/attendance" element={<Attendance />} />
     </Routes>

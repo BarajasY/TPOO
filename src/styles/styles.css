@@ -32,6 +32,11 @@ body {
   --fs6: 30px;
   --fs7: 35px;
   --fs8: 40px;
+
+  --border-radius-1: 8px;
+  --border-radius-1: 16px;
+  --border-radius-1: 24px;
+  --border-radius-1: 32px;
 }
 
 @font-face {

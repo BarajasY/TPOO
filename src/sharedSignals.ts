@@ -1,5 +1,5 @@
 import { createSignal } from "solid-js";
-import { RegisterData, RegisterResponse } from "./types";
+import { DBConfigInterface, RegisterData, RegisterResponse } from "./types";
 
 export const SectionsEnum = {
   Attendance: Symbol("Attendance"),
@@ -22,3 +22,7 @@ export const [AttendanceResponse, setAttendanceResponse] = createSignal<Register
 })
 
 export const [CurrentDay, setCurrentDay] = createSignal<Date>(new Date())
+
+//DB Setup
+export const [DatabaseCredentials, setDatabaseCredentials] = createSignal<DBConfigInterface>();
+export const [TempDatabaseCredentials, setTempDatabaseCredentials] = createSignal<DBConfigInterface>();

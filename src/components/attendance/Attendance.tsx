@@ -9,7 +9,7 @@ import { setAttendanceData } from "../../sharedSignals";
 const Attendance = () => {
   const [Salas, setSalas] = createSignal<Sala[]>([]);
 
-  onMount(() => {
+  onMount(async () => {
     invoke("get_salas").then((salas) => {
       if (salas) {
         setSalas(salas as Sala[])

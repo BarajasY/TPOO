@@ -37,3 +37,11 @@ export type TodayPlotXTest = {
   date: Date,
   count: number
 }
+
+export type DBConfigInterface = {
+  db_name: string,
+  db_port: number,
+  db_user: string,
+  db_pass: string,
+  db_host:string
+}

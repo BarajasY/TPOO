@@ -1,16 +1,12 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
-use sqlx::{PgPool, Postgres};
-use sqlx_migrator::migrator::{Migrator, Info, Migrate};
+use sqlx::PgPool;
+use tokio::sync::Mutex;
 
 mod attendency;
 mod db;
 mod migrations;
-
-pub struct Database {
-    pool: PgPool,
-}
 
 // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
 #[tauri::command]
@@ -22,19 +18,20 @@ fn greet(name: &str) -> String {
 async fn main() {
     dotenvy::dotenv().expect("Could not load environment variables");
 
-    let pool = db::make_pool().await;
+    //Basically generates a mutex skeleton of the database pool that will be later overrided by the
+    //db::make_database function.
+    let placeholder_database: Mutex<Option<PgPool>> = Mutex::new(None);
 
-    let mut migrator: Migrator<Postgres> = Migrator::default();
-    migrator.add_migrations(migrations::migrations());
-
-    migrator.apply_all(&pool).await.expect("Could not run migrations");
-    println!("Migrations successfully applied");
-
-        tauri::Builder::default()
-            .invoke_handler(tauri::generate_handler![greet, attendency::controller::get_salas,
+    tauri::Builder::default()
+        .manage(placeholder_database)
+        .invoke_handler(tauri::generate_handler![
+            greet,
+            db::make_database,
+            db::run_migrations,
+            attendency::controller::get_salas,
             attendency::controller::add_registration,
-            attendency::controller::get_statistics_by_date])
-            .manage(Database{ pool })
-            .run(tauri::generate_context!())
-            .unwrap();
+            attendency::controller::get_statistics_by_date,
+        ])
+        .run(tauri::generate_context!())
+        .unwrap();
 }

@@ -17,13 +17,14 @@
         "all": true
       },
       "fs": {
-        "all": true
+        "all": true,
+        "scope": ["$LOCALDATA/tpoo/", "$LOCALDATA/tpoo/*"]
       }
     },
     "bundle": {
       "active": true,
       "targets": "all",
-      "identifier": "com.tpoo.dev",
+      "identifier": "tpoo",
       "icon": [
         "icons/32x32.png",
         "icons/128x128.png",
