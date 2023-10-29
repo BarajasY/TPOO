@@ -2,10 +2,10 @@
 use sqlx::PgPool;
 
 pub async fn make_pool()-> PgPool {
-    let test = "postgres://postgres:puerta756859@localhost:1402/tpoo";
+    let conn_str = dotenvy::var("PG_CONN_STRING").expect("Could not load env pg variable");
 
     println!("Connected to database successfully");
-    PgPool::connect(test).await.expect("Could not connect to database")
+    PgPool::connect(&conn_str).await.expect("Could not connect to database")
 }
 
 /* pub async fn _check_migrations(pool: SqlitePool) -> bool {
