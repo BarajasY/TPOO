@@ -1,0 +1,33 @@
+{
+  "name": "tpoo",
+  "version": "0.0.0",
+  "description": "",
+  "scripts": {
+    "start": "vite",
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview",
+    "tauri": "tauri"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@motionone/solid": "^10.16.2",
+    "@motionone/types": "^10.16.3",
+    "@otonashixav/solid-flip": "^0.10.5",
+    "@solidjs/router": "^0.8.3",
+    "@tauri-apps/api": "^1.4.0",
+    "@types/d3": "^7.4.2",
+    "chart.js": "^4.4.0",
+    "d3": "^7.8.5",
+    "motion": "^10.16.4",
+    "solid-icons": "^1.0.12",
+    "solid-js": "^1.7.8"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^1.4.0",
+    "sass": "^1.69.3",
+    "typescript": "^5.0.2",
+    "vite": "^4.4.4",
+    "vite-plugin-solid": "^2.7.0"
+  }
+}

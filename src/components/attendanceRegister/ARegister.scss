@@ -1,0 +1,106 @@
+.a-register {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  .header {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 20px;
+    display: flex;
+    justify-content: flex-end;
+
+    .back-sala {
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--main-2);
+      border: 2px solid transparent;
+      border-radius: 5px;
+      transition: .2s;
+      cursor: pointer;
+
+      .icon {
+        color: var(--main-1);
+      }
+
+      p {
+        color: var(--main-1);
+        font-size: var(--fs3);
+      }
+
+      &:hover {
+        border: 2px solid var(--black);
+
+        .icon {
+          color: var(--black);
+        }
+      }
+    }
+  }
+
+  .content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    .name {
+      font-size: var(--fs3);
+      color: var(--main-1);
+      margin-top: 30px;
+      position: absolute;
+      top: 0;
+
+    }
+
+    .mat_input {
+      margin-top: 20px;
+      padding: 10px;
+      outline: none;
+      border-radius: 5px;
+      font-size: var(--fs4);
+      letter-spacing: 5px;
+      text-align: center;
+      font-family: 'Poppins';
+    }
+
+    .send-button {
+      margin-top: var(--fs2);
+      outline: none;
+      padding: 10px;
+      border: 2px solid black;
+      transition: .2s;
+      font-size: var(--fs3);
+      background: var(--main-2);
+      border-radius: 5px;
+
+      &:hover {
+        border: 2px solid var(--main-1);
+        color: var(--main-1);
+        background: var(--white);
+        cursor: pointer;
+      }
+
+      &:focus {
+        box-shadow: 0px 0px 15px var(--main-1);
+      }
+    }
+  }
+
+  .message {
+    width: 150px;
+    height: 100px;
+    position: absolute;
+    margin-top: 300px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid var(--main-1);
+    background: var(--main-2-transparent);
+  }
+}

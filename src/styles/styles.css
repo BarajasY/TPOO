@@ -1,0 +1,81 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  text-decoration: none;
+  box-sizing: border-box;
+  font-family: "Raleway";
+  font-weight: 900;
+  outline: none;
+}
+
+a {
+  color: black;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+}
+
+:root {
+  --main-1:#51a8fa;
+  --main-1-transparent: rgba(81, 168, 250, 0.9);
+  --main-2:#c1e8fe;
+  --main-2-transparent: rgba(193, 232, 254, 0.913);
+  --white: #FFFFFF;
+  --black: #000000;
+
+  --fs2: 10px;
+  --fs3: 15px;
+  --fs4: 20px;
+  --fs5: 25px;
+  --fs6: 30px;
+  --fs7: 35px;
+  --fs8: 40px;
+}
+
+@font-face {
+  font-family: "Raleway";
+  font-weight: 100;
+  src: url("../fonts/raleway/Raleway-ExtraLight.ttf");
+}
+@font-face {
+  font-family: "Raleway";
+  font-weight: 200;
+  src: url("../fonts/raleway/Raleway-Light.ttf");
+}
+@font-face {
+  font-family: "Raleway";
+  font-weight: 300;
+  src: url("../fonts/raleway/Raleway-Thin.ttf");
+}
+@font-face {
+  font-family: "Raleway";
+  font-weight: 400;
+  src: url("../fonts/raleway/Raleway-Regular.ttf");
+}
+@font-face {
+  font-family: "Raleway";
+  font-weight: 500;
+  src: url("../fonts/raleway/Raleway-Medium.ttf");
+}
+@font-face {
+  font-family: "Raleway";
+  font-weight: 600;
+  src: url("../fonts/raleway/Raleway-SemiBold.ttf");
+}
+@font-face {
+  font-family: "Raleway";
+  font-weight: 700;
+  src: url("../fonts/raleway/Raleway-Bold.ttf");
+}
+@font-face {
+  font-family: "Raleway";
+  font-weight: 800;
+  src: url("../fonts/raleway/Raleway-ExtraBold.ttf");
+}
+@font-face {
+  font-family: "Raleway";
+  font-weight: 900;
+  src: url("../fonts/raleway/Raleway-Black.ttf");
+}
