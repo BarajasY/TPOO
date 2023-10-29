@@ -10,10 +10,11 @@ pub(crate) struct CTBibliotecaO;
 impl Operation<Postgres> for CTBibliotecaO {
     // Up function runs apply migration
     async fn up(&self, connection: &mut PgConnection) -> Result<(), Error> {
+        println!("biblioteca");
         sqlx::query(
             "CREATE TABLE biblioteca (
           biblio_id SERIAL PRIMARY KEY
-        )",
+        );",
         )
         .execute(connection)
         .await
@@ -23,7 +24,7 @@ impl Operation<Postgres> for CTBibliotecaO {
 
     // down migration runs down migration
     async fn down(&self, connection: &mut PgConnection) -> Result<(), Error> {
-        sqlx::query("DROP TABLE biblioteca")
+        sqlx::query("DROP TABLE biblioteca;")
             .execute(connection)
             .await
             .expect("Could not drop table biblioteca");
@@ -36,11 +37,11 @@ pub(crate) struct CTBibliotecaM;
 #[async_trait::async_trait]
 impl Migration<Postgres> for CTBibliotecaM {
     fn app(&self) -> &str {
-        "main"
+        "001"
     }
 
     fn name(&self) -> &str {
-        "create_table_biblioteca"
+        "0001"
     }
 
     fn parents(&self) -> Vec<Box<dyn Migration<Postgres>>> {

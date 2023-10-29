@@ -10,10 +10,11 @@ pub(crate) struct CTVisitantO;
 impl Operation<Postgres> for CTVisitantO {
     // Up function runs apply migration
     async fn up(&self, connection: &mut PgConnection) -> Result<(), Error> {
+        println!("visitant");
         sqlx::query(
             "CREATE TABLE visitant (
                 visitant_mat SERIAL PRIMARY KEY
-            )",
+            );",
         )
         .execute(connection)
         .await?;
@@ -22,7 +23,7 @@ impl Operation<Postgres> for CTVisitantO {
 
     // down migration runs down migration
     async fn down(&self, connection: &mut PgConnection) -> Result<(), Error> {
-        sqlx::query("DROP TABLE visitant")
+        sqlx::query("DROP TABLE visitant;")
             .execute(connection)
             .await?;
         Ok(())
@@ -34,11 +35,11 @@ pub(crate) struct CTVisitantM;
 #[async_trait::async_trait]
 impl Migration<Postgres> for CTVisitantM {
     fn app(&self) -> &str {
-        "main"
+        "0003"
     }
 
     fn name(&self) -> &str {
-        "create_table_visitant"
+        "0003"
     }
 
     fn parents(&self) -> Vec<Box<dyn Migration<Postgres>>> {
