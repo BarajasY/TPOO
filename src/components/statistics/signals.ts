@@ -50,7 +50,6 @@ export const groupDatesByHour = (dates: number[]): Map<string, TodayPlotXHelper>
 }
 
 export const countTransactionEntradaSalida = (data:Asistencia[]):[number, number, number] => {
-  console.log(data);
   //Number of rows that have entrada
   let entrada = 0;
   //Number of rows that have salida (which consequently means they also have entrada)
@@ -58,7 +57,6 @@ export const countTransactionEntradaSalida = (data:Asistencia[]):[number, number
   //Number of rouws that have entrada and salida.
   let transaction = 0;
   for (const d of data) {
-    console.log(d);
     if (d.entrada > 0) {
       entrada++
     }

@@ -28,13 +28,19 @@ pub async fn make_database(credentials:DBCredentials, state: State<'_, Mutex<Opt
     );
 
     //Use the formatted string to generate postgres pool.
-    let new_pool = PgPool::connect(&conn_str).await.expect("Could not connect to database");
+    let new_pool = PgPool::connect(&conn_str).await;
 
-    //Updates tauri State pool to be used across the application.
-    *state.lock().await = Some(new_pool);
+    match new_pool {
+        Ok(pool) => {
+            //Updates tauri State pool to be used across the application.
+            *state.lock().await = Some(pool);
+            Ok(true)
+        },
+        Err(_e) => {
+            Ok(false)
+        }
+    }
 
-    println!("Successfully connected to database.");
-    Ok(true)
 }
 
 #[tauri::command]

@@ -3,10 +3,12 @@
 
 use sqlx::PgPool;
 use tokio::sync::Mutex;
+use tauri_plugin_log::LogTarget;
 
 mod attendency;
 mod db;
 mod migrations;
+mod events;
 
 // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
 #[tauri::command]
@@ -16,13 +18,17 @@ fn greet(name: &str) -> String {
 
 #[tokio::main]
 async fn main() {
-    dotenvy::dotenv().expect("Could not load environment variables");
 
     //Basically generates a mutex skeleton of the database pool that will be later overrided by the
     //db::make_database function.
     let placeholder_database: Mutex<Option<PgPool>> = Mutex::new(None);
 
     tauri::Builder::default()
+        .plugin(tauri_plugin_log::Builder::default().targets([
+            LogTarget::LogDir,
+            LogTarget::Stdout,
+            LogTarget::Webview,
+        ]).build())
         .manage(placeholder_database)
         .invoke_handler(tauri::generate_handler![
             greet,
@@ -31,6 +37,9 @@ async fn main() {
             attendency::controller::get_salas,
             attendency::controller::add_registration,
             attendency::controller::get_statistics_by_date,
+            events::controller::get_events,
+            events::controller::delete_event,
+            events::controller::add_event
         ])
         .run(tauri::generate_context!())
         .unwrap();

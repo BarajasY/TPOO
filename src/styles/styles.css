@@ -18,12 +18,17 @@ body {
 }
 
 :root {
+  --error: #B00020;
+  --error-transparent: #B00020b8;
   --main-1:#51a8fa;
   --main-1-transparent: rgba(81, 168, 250, 0.9);
   --main-2:#c1e8fe;
   --main-2-transparent: rgba(193, 232, 254, 0.913);
+  --main-3: #2d3084;
+  --main-3-transparent: #2d3084b8;
   --white: #FFFFFF;
   --black: #000000;
+
 
   --fs2: 10px;
   --fs3: 15px;

@@ -1,54 +1,57 @@
+use sqlx::{Postgres, PgConnection};
 use sqlx_migrator::{error::Error, migration::Migration};
 use sqlx_migrator::operation::Operation;
 // Its better to use sqlx imported from sqlx_migrator
-use sqlx::{Postgres, PgConnection};
 use sqlx_migrator::sqlx;
 
-pub(crate) struct CTBibliotecaO;
+use super::create_table_eventos::CTEventosM;
+
+pub(crate) struct CTEventosInvitadosO;
 
 #[async_trait::async_trait]
-impl Operation<Postgres> for CTBibliotecaO {
+impl Operation<Postgres> for CTEventosInvitadosO {
     // Up function runs apply migration
     async fn up(&self, connection: &mut PgConnection) -> Result<(), Error> {
-        println!("biblioteca");
+        println!("eventos invitados");
         sqlx::query(
-            "CREATE TABLE biblioteca (
-          biblio_id SERIAL PRIMARY KEY
-        );",
+            "CREATE TABLE eventos_invitados (
+              id VARCHAR(255) NOT NULL,
+              evento_id INT,
+              CONSTRAINT eventos_invitados_pkey PRIMARY KEY (id),
+              CONSTRAINT fk_evento FOREIGN KEY (evento_id) REFERENCES eventos(id)
+            );",
         )
         .execute(connection)
-        .await
-        .expect("Could not create table biblioteca");
+        .await?;
         Ok(())
     }
 
     // down migration runs down migration
     async fn down(&self, connection: &mut PgConnection) -> Result<(), Error> {
-        sqlx::query("DROP TABLE biblioteca;")
+        sqlx::query("DROP TABLE eventos_invitados;")
             .execute(connection)
-            .await
-            .expect("Could not drop table biblioteca");
+            .await?;
         Ok(())
     }
 }
 
-pub(crate) struct CTBibliotecaM;
+pub(crate) struct CTEventosInvitadosM;
 
 #[async_trait::async_trait]
-impl Migration<Postgres> for CTBibliotecaM {
+impl Migration<Postgres> for CTEventosInvitadosM {
     fn app(&self) -> &str {
-        "001"
+        "0005"
     }
 
     fn name(&self) -> &str {
-        "0001"
+        "0005"
     }
 
     fn parents(&self) -> Vec<Box<dyn Migration<Postgres>>> {
-        vec![]
+        vec![Box::new(CTEventosM)]
     }
 
     fn operations(&self) -> Vec<Box<dyn Operation<Postgres>>> {
-        vec![Box::new(CTBibliotecaO)]
+        vec![Box::new(CTEventosInvitadosO)]
     }
 }

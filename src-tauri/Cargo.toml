@@ -20,12 +20,16 @@ serde_json = "1.0"
 sqlx = { version = "0.7", features = [ "runtime-tokio", "tls-native-tls", "postgres", "macros" ] }
 sqlx_migrator = { version = "0.9.2", features= ["postgres"] }
 tokio = { version = "1", features = ["full"] }
-dotenv = "0.15"
-dotenvy = "0.15.7"
 async-trait = "0.1.74"
+tauri-plugin-log = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "v1" }
 
 [features]
 # this feature is used for production builds or when `devPath` points to the filesystem
 # DO NOT REMOVE!!
 custom-protocol = ["tauri/custom-protocol"]
 postgres = ["sqlx/postgres", "sqlx/runtime-tokio"]
+
+[dependencies.tauri-plugin-sql]
+git = "https://github.com/tauri-apps/plugins-workspace"
+branch = "v1"
+features = ["postgres"]

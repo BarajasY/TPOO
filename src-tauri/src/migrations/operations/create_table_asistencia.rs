@@ -3,9 +3,9 @@ use sqlx_migrator::{error::Error, migration::Migration};
 use sqlx_migrator::operation::Operation;
 // Its better to use sqlx imported from sqlx_migrator
 use sqlx_migrator::sqlx;
-use super::create_table_biblioteca::CTBibliotecaM;
+
 use super::create_table_sala::CTSalaM;
-use super::create_table_visitant::CTVisitantM;
+use super::create_table_visitant::CTVisitanteM;
 
 pub(crate) struct CTAsistenciaO;
 
@@ -16,15 +16,14 @@ impl Operation<Postgres> for CTAsistenciaO {
         println!("asistencia");
         sqlx::query(
             "CREATE TABLE asistencia (
-              asistencia_id SERIAL PRIMARY KEY,
-              sala_id int4 NOT NULL,
-              visitant_mat int4 NOT NULL,
-              biblio_id int4 NOT NULL,
-              entrada int8 NULL,
-              salida int8 NULL,
-              CONSTRAINT fk_biblio_id FOREIGN KEY (biblio_id) REFERENCES biblioteca(biblio_id),
-              CONSTRAINT fk_sala_id FOREIGN KEY (sala_id) REFERENCES sala(sala_id),
-              CONSTRAINT fk_visitante_mat FOREIGN KEY (visitant_mat) REFERENCES visitant(visitant_mat)
+                id serial4 NOT NULL,
+                sala_id int4 NULL,
+                visitante_id int4 NULL,
+                entrada int8 NOT NULL,
+                salida int8 NULL,
+                CONSTRAINT asistencia_pkey PRIMARY KEY (id),
+                CONSTRAINT fk_sala FOREIGN KEY (sala_id) REFERENCES sala(id),
+                CONSTRAINT fk_visitante FOREIGN KEY (visitante_id) REFERENCES visitante(id)
             );",
         )
         .execute(connection)
@@ -46,17 +45,18 @@ pub(crate) struct CTAsistenciaM;
 #[async_trait::async_trait]
 impl Migration<Postgres> for CTAsistenciaM {
     fn app(&self) -> &str {
-        "0004"
+        "0003"
     }
 
     fn name(&self) -> &str {
-        "0004"
+        "0003"
     }
 
     fn parents(&self) -> Vec<Box<dyn Migration<Postgres>>> {
-        vec![Box::new(CTBibliotecaM),
+        vec![
             Box::new(CTSalaM),
-            Box::new(CTVisitantM)]
+            Box::new(CTVisitanteM)
+            ]
     }
 
     fn operations(&self) -> Vec<Box<dyn Operation<Postgres>>> {

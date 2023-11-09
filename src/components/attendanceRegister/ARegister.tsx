@@ -16,7 +16,7 @@ const ARegister: Component = () => {
     setCurrentSalaId(0);
     setAttendanceData(() => ({
       sala_id: 0,
-      visitante_mat: 0,
+      visitante_id: 0,
       fecha: 0
     }))
     setCurrentSalaName('')
@@ -26,7 +26,7 @@ const ARegister: Component = () => {
   const submitAttendance = () => {
     setAttendanceData((prev) => ({
       ...prev,
-      visitante_mat: Matricula(),
+      visitante_id: Matricula(),
       fecha: new Date().getTime()
     }))
 
@@ -37,13 +37,13 @@ const ARegister: Component = () => {
           setAttendanceResponse(() => ({
             message: temp.message,
             register_type: temp.register_type,
-            visitant_mat: temp.visitant_mat
+            visitante_id: temp.visitante_id
           }));
           setTimeout(() => {
             setAttendanceResponse(() => ({
               message: 'Idle',
               register_type: 'Idle',
-              visitant_mat: 0
+              visitante_id: 0
             }))
           }, 1500);
         }
@@ -78,10 +78,10 @@ const ARegister: Component = () => {
           <Motion.div initial={{ opacity: 0, y: -30 }} inView={{ opacity: 1, y: 0 }} exit={{opacity: 0, y: -30}} class="message">
             <Switch>
               <Match when={AttendanceResponse().register_type === 'Entrada'}>
-                <p class="entrada">Bienvenido {AttendanceResponse().visitant_mat}</p>
+                <p class="entrada">Bienvenido {AttendanceResponse().visitante_id}</p>
               </Match>
               <Match when={AttendanceResponse().register_type === 'Salida'}>
-                <p class="salida">Hasta luego {AttendanceResponse().visitant_mat}</p>
+                <p class="salida">Hasta luego {AttendanceResponse().visitante_id}</p>
               </Match>
             </Switch>
           </Motion.div>

@@ -16,6 +16,10 @@
     p {
       color: var(--black);
     }
+
+    .error {
+      color: var(--error) !important;
+    }
   }
 
   .submit-form {
@@ -33,6 +37,40 @@
       background: var(--main-1);
       color: var(--main-2);
       cursor: pointer;
+    }
+  }
+}
+
+.change {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+
+  .make-migrations {
+    padding: 10px;
+    background: var(--main-2);
+    border: 2px solid black;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: .2s;
+    margin-right: 5px;
+
+    &:hover {
+      background: var(--main-3);
+      color: var(--main-2);
+    }
+  }
+
+  .active {
+    background: var(--main-3);
+    color: var(--main-2);
+    border: 2px solid var(--main-3);
+  }
+
+  .header {
+
+    .success {
+      color: var(--main-3-transparent);
     }
   }
 }
