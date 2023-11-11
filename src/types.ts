@@ -54,3 +54,8 @@ export type CreateEvento = {
   sala_id: number,
   nombre: string
 }
+
+export type QueryState = {
+  type: Symbol,
+  message: string
+}

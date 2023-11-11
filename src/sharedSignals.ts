@@ -1,5 +1,5 @@
 import { createSignal } from "solid-js";
-import { DBConfigInterface, RegisterData, RegisterResponse } from "./types";
+import { DBConfigInterface, Evento, RegisterData, RegisterResponse } from "./types";
 
 export const SectionsEnum = {
   Attendance: Symbol("Attendance"),
@@ -32,3 +32,11 @@ export const [TempDatabaseCredentials, setTempDatabaseCredentials] = createSigna
   db_user: "postgres",
   db_port: 1402
 });
+
+//Evento
+export const [CurrentEvent, setCurrentEvent] = createSignal<Evento>();
+
+export const QueryStateEnum = {
+  Success: Symbol('Success'),
+  Error: Symbol('Error')
+}

@@ -1,0 +1,54 @@
+.events-invite {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+
+  .label {
+    font-size: var(--fs4);
+  }
+
+  .name {
+    position: absolute;
+    margin-top: var(--fs3);
+    border: 2px solid var(--main-3);
+    padding: 5px 10px;
+    border-radius: 4px;
+    top: 0;
+  }
+
+  .disclaimer {
+    font-size: var(--fs3);
+    color: var(--error-transparent);
+  }
+
+  .input {
+    padding: var(--fs2);
+    border-radius: 4px;
+    border: 2px solid var(--main-3);
+    color: var(--main-3);
+    font-size: var(--fs4);
+    margin-top: 10px;
+  }
+
+  .input::placeholder {
+    color: var(--main-3-transparent);
+  }
+
+  .submit {
+    margin-top: 10px;
+    padding: 10px;
+    background: var(--main-2);
+    color: var(--main-3);
+    transition: .2s;
+    border-radius: 4px;
+    font-size: var(--fs3);
+
+    &:hover {
+      background: var(--main-3);
+      color: var(--main-2);
+    }
+  }
+}

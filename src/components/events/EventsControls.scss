@@ -1,0 +1,44 @@
+.events-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+
+  .name {
+    position: absolute;
+    margin-top: var(--fs3);
+    border: 2px solid var(--main-3);
+    padding: 5px 10px;
+    border-radius: 4px;
+    top: 0;
+  }
+
+  .controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    a {
+      button {
+        margin: var(--fs2);
+        width: 140px;
+        padding: var(--fs2);
+        background: var(--white);
+        color: var(--main-3);
+        transition: .2s;
+        border-radius: 5px;
+        border: 2px solid var(--main-3);
+        font-size: var(--fs3);
+
+
+        &:hover {
+          background: var(--main-3);
+          color: var(--white);
+        }
+      }
+    }
+  }
+}

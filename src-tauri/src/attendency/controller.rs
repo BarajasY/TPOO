@@ -71,13 +71,13 @@ pub struct RegisterData {
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct RegisterAnswer {
-    message: String,
-    visitante_id: i32,
-    register_type: String,
+    pub message: String,
+    pub visitante_id: i32,
+    pub register_type: String,
 }
 
 impl RegisterAnswer {
-    fn new(message:String, visitante_id: i32, register_type: String) -> RegisterAnswer {
+    pub fn new(message:String, visitante_id: i32, register_type: String) -> RegisterAnswer {
         let temp:RegisterAnswer = RegisterAnswer { message, visitante_id, register_type };
         temp
     }

@@ -11,22 +11,22 @@ const SideBar = () => {
     <div
       class="appSideBar">
       <A href="/attendance"
-        classList={{ 'active': location.pathname === '/attendance' }}
+        classList={{ 'active': location.pathname.startsWith('/attendance') }}
       >
         <FaRegularCalendarCheck class="icon"/>
       </A>
       <A href="/statistics"
-        classList={{ 'active': location.pathname === '/statistics' }}
+        classList={{ 'active': location.pathname.startsWith('/statistics') }}
       >
         <IoStatsChartSharp class="icon"/>
       </A>
       <A href="/events"
-        classList={{ 'active': location.pathname === '/events' }}
+        classList={{ 'active': location.pathname.startsWith('/events') }}
       >
         <BsCalendarEvent class="icon"/>
       </A>
       <A href="/config"
-        classList={{ 'active': location.pathname === '/config' }}
+        classList={{ 'active': location.pathname.startsWith('/config') }}
       >
         <FaSolidGear class="icon"/>
       </A>

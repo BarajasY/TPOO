@@ -1,6 +1,6 @@
 import { Component, onMount } from "solid-js";
 import Chart from "chart.js/auto";
-import { TodayPlotXHelper } from "../../types";
+import { TodayPlotXHelper } from "../../../types";
 import "./plots.scss"
 
 interface props {

@@ -5,6 +5,8 @@ import { Evento } from '../../types';
 import AddEventForm from './AddEventForm';
 // @ts-ignore
 import { Motion } from "@motionone/solid";
+import { A } from '@solidjs/router';
+import { setCurrentEvent } from '../../sharedSignals';
 
 const Events: Component = () => {
 
@@ -35,7 +37,9 @@ const Events: Component = () => {
             <For each={Events()}>
               {(v) => (
                 <div class='event'>
-                  <button>{v.nombre}</button>
+                  <A href={`./${v.id}`} onclick={() => setCurrentEvent(v)}>
+                    <button>{v.nombre}</button>
+                  </A>
                 </div>
               )}
             </For>

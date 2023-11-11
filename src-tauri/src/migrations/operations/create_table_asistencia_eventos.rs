@@ -16,9 +16,9 @@ impl Operation<Postgres> for CTAsistenciaEventosO {
         println!("asistencia eventos");
         sqlx::query(
             "CREATE TABLE asistencia_eventos (
-              id VARCHAR(255) NOT NULL,
+              id Integer NOT NULL,
               evento_id INT,
-              eventos_invitados_id VARCHAR(255),
+              eventos_invitados_id Integer,
               entrada int8 NOT NULL,
               salida int8 NULL,
               CONSTRAINT asistencia_eventos_pkey PRIMARY KEY (id),

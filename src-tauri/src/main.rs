@@ -39,7 +39,10 @@ async fn main() {
             attendency::controller::get_statistics_by_date,
             events::controller::get_events,
             events::controller::delete_event,
-            events::controller::add_event
+            events::controller::add_event,
+            events::controller::get_event_by_id,
+            events::controller::add_invitado,
+            events::controller::add_event_registration
         ])
         .run(tauri::generate_context!())
         .unwrap();

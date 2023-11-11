@@ -8,6 +8,10 @@
   outline: none;
 }
 
+button {
+  cursor: pointer;
+}
+
 a {
   color: black;
 }
@@ -28,6 +32,7 @@ body {
   --main-3-transparent: #2d3084b8;
   --white: #FFFFFF;
   --black: #000000;
+  --black-transparent: #000000b8;
 
 
   --fs2: 10px;

@@ -15,7 +15,7 @@ import {
   setTotalTransactions
 } from "./signals";
 import { CurrentDay } from "../../sharedSignals";
-import LinePlot from "../plots/PlotToday";
+import LinePlot from "../utils/plots/PlotToday";
 import "./statistics.scss"
 
 const Statistics: Component = () => {

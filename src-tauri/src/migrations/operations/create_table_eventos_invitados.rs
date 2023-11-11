@@ -15,7 +15,7 @@ impl Operation<Postgres> for CTEventosInvitadosO {
         println!("eventos invitados");
         sqlx::query(
             "CREATE TABLE eventos_invitados (
-              id VARCHAR(255) NOT NULL,
+              id INTEGER NOT NULL,
               evento_id INT,
               CONSTRAINT eventos_invitados_pkey PRIMARY KEY (id),
               CONSTRAINT fk_evento FOREIGN KEY (evento_id) REFERENCES eventos(id)
