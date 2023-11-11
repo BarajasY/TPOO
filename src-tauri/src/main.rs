@@ -34,6 +34,7 @@ async fn main() {
             greet,
             db::make_database,
             db::run_migrations,
+            db::revert_migrations,
             attendency::controller::get_salas,
             attendency::controller::add_registration,
             attendency::controller::get_statistics_by_date,

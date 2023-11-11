@@ -1,0 +1,13 @@
+.top-text {
+  position: absolute;
+  top: 0;
+  margin-top: 10px;
+
+  .text {
+    padding: 7px 10px;
+    border-radius: 5px;
+    border: 2px solid var(--main-3);
+    color: var(--main-1);
+    background: var(--white);
+  }
+}

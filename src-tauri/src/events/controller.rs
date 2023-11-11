@@ -149,6 +149,7 @@ pub async fn add_event_registration(
     state: State<Mutex<Option<PgPool>>, '_>,
     data: EventAttendance,
 ) -> Result<RegisterAnswer, ()> {
+    dbg!(&data);
     let guard = state.lock().await;
     let pool = guard.as_ref().unwrap();
 

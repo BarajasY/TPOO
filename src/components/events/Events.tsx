@@ -16,7 +16,6 @@ const Events: Component = () => {
   onMount(() => {
     invoke('get_events').then((ev) => {
       setEvents(ev as Evento[])
-      console.log(Events())
     })
   })
 

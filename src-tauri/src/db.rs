@@ -55,3 +55,16 @@ pub async fn run_migrations(state: State<Mutex<Option<PgPool>>, '_>) -> Result<b
 
     Ok(true)
 }
+
+#[tauri::command]
+pub async fn revert_migrations(state: State<Mutex<Option<PgPool>>, '_>) -> Result<bool, ()> {
+    let guard = state.lock().await;
+    let pool = guard.as_ref().unwrap();
+
+    let mut migrator: Migrator<Postgres> = Migrator::default();
+    migrator.add_migrations(migrations::migrations());
+    migrator.revert_all(pool).await.expect("Could not revert migrations");
+    println!("Successfully reverted all migrations");
+
+    Ok(true)
+}

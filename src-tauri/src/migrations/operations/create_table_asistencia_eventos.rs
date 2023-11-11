@@ -16,12 +16,11 @@ impl Operation<Postgres> for CTAsistenciaEventosO {
         println!("asistencia eventos");
         sqlx::query(
             "CREATE TABLE asistencia_eventos (
-              id Integer NOT NULL,
+              id SERIAL PRIMARY KEY,
               evento_id INT,
               eventos_invitados_id Integer,
               entrada int8 NOT NULL,
               salida int8 NULL,
-              CONSTRAINT asistencia_eventos_pkey PRIMARY KEY (id),
               CONSTRAINT fk_evento_invitado FOREIGN KEY (eventos_invitados_id) REFERENCES eventos_invitados(id),
               CONSTRAINT fk_evento FOREIGN KEY (evento_id) REFERENCES eventos(id)
             );",

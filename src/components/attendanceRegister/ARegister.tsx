@@ -7,6 +7,7 @@ import { invoke } from "@tauri-apps/api/tauri";
 import { RegisterResponse } from "../../types";
 //@ts-ignore
 import { Motion, Presence } from "@motionone/solid"
+import TopText from "../utils/topText/TopText";
 
 const ARegister: Component = () => {
 
@@ -64,7 +65,7 @@ const ARegister: Component = () => {
         </button>
       </div>
       <div class="content">
-        <h1 class="name">{currentSalaName()}</h1>
+        <TopText text={currentSalaName()}/>
         <h1 class="text">Escriba su matrícula</h1>
         <input
           type="number"

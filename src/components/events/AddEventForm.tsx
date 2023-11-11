@@ -15,7 +15,6 @@ const AddEventForm:Component = () => {
   })
 
   const submit = async () => {
-    console.log(AddEventData())
     invoke("add_event", {event: AddEventData()})
   }
 
