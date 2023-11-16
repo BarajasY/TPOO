@@ -3,6 +3,7 @@ use sqlx_migrator::{error::Error, migration::Migration};
 use sqlx_migrator::operation::Operation;
 // Its better to use sqlx imported from sqlx_migrator
 use sqlx_migrator::sqlx;
+
 use super::create_table_sala::CTSalaM;
 
 pub(crate) struct CTEventosO;
@@ -14,11 +15,10 @@ impl Operation<Postgres> for CTEventosO {
         println!("eventos");
         sqlx::query(
             "CREATE TABLE eventos (
-              id serial4 NOT NULL,
-              sala_id int4 NULL,
-              nombre varchar(255) NULL,
-              CONSTRAINT eventos_pkey PRIMARY KEY (id),
-              CONSTRAINT fk_sala FOREIGN KEY (sala_id) REFERENCES sala(id)
+              evento_id SERIAL PRIMARY KEY,
+              evento_sala_id int4 NULL,
+              evento_nombre varchar(255) NULL,
+              CONSTRAINT fk_sala FOREIGN KEY (evento_sala_id) REFERENCES sala(sala_id)
             );",
         )
         .execute(connection)
@@ -40,11 +40,11 @@ pub(crate) struct CTEventosM;
 #[async_trait::async_trait]
 impl Migration<Postgres> for CTEventosM {
     fn app(&self) -> &str {
-        "0004"
+        "0003"
     }
 
     fn name(&self) -> &str {
-        "0004"
+        "0003"
     }
 
     fn parents(&self) -> Vec<Box<dyn Migration<Postgres>>> {

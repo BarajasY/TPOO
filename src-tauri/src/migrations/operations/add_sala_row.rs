@@ -13,7 +13,7 @@ impl Operation<Postgres> for ASalaRO {
     async fn up(&self, connection: &mut PgConnection) -> Result<(), Error> {
         println!("sala_add");
         sqlx::query(
-            "INSERT INTO sala (id, piso, nombre) VALUES (1, 1, 'Biblioteca piso 1');",
+            "INSERT INTO sala (sala_id, sala_piso, sala_nombre) VALUES (1, 1, 'Biblioteca piso 1');",
         )
         .execute(connection)
         .await?;
@@ -22,7 +22,7 @@ impl Operation<Postgres> for ASalaRO {
 
     // down migration runs down migration
     async fn down(&self, connection: &mut PgConnection) -> Result<(), Error> {
-        sqlx::query("DELETE FROM sala where id = 1;")
+        sqlx::query("DELETE FROM sala where sala_id = 1;")
             .execute(connection)
             .await?;
         Ok(())

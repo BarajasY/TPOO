@@ -15,7 +15,7 @@ const DBForm: Component = () => {
       </div>
       <div class="input-text-container">
         <p class="label">Contraseña</p>
-        <input type="password" class="input" placeholder="Ej. yvkvebif" oninput={(e) => setTempDatabaseCredentials(dc => ({...dc!, db_pass: e.target.value}))} />
+      <input type="password" class="input" placeholder="Ej. yvkvebif" oninput={(e) => setTempDatabaseCredentials(dc => ({...dc!, db_pass: e.target.value}))} />
       </div>
       <div class="input-text-container">
         <p class="label">Host</p>

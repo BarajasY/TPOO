@@ -4,25 +4,22 @@ use sqlx_migrator::operation::Operation;
 // Its better to use sqlx imported from sqlx_migrator
 use sqlx_migrator::sqlx;
 
-use super::create_table_eventos_invitados::CTEventosInvitadosM;
-use super::create_table_eventos::CTEventosM;
+use super::create_table_visitante::CTVisitanteM;
 
-pub(crate) struct CTAsistenciaEventosO;
+pub(crate) struct CTAsistenciaDataO;
 
 #[async_trait::async_trait]
-impl Operation<Postgres> for CTAsistenciaEventosO {
+impl Operation<Postgres> for CTAsistenciaDataO {
     // Up function runs apply migration
     async fn up(&self, connection: &mut PgConnection) -> Result<(), Error> {
-        println!("asistencia eventos");
+        println!("asistencia data");
         sqlx::query(
-            "CREATE TABLE asistencia_eventos (
-              id SERIAL PRIMARY KEY,
-              evento_id INT,
-              eventos_invitados_id Integer,
+            "CREATE TABLE asistencia_data (
+              asistencia_data_id SERIAL PRIMARY KEY,
+              visitante_id INT,
               entrada int8 NOT NULL,
-              salida int8 NULL,
-              CONSTRAINT fk_evento_invitado FOREIGN KEY (eventos_invitados_id) REFERENCES eventos_invitados(id),
-              CONSTRAINT fk_evento FOREIGN KEY (evento_id) REFERENCES eventos(id)
+              salida int8,
+              CONSTRAINT fk_visitante_id FOREIGN KEY (visitante_id) REFERENCES visitante(visitante_id)
             );",
         )
         .execute(connection)
@@ -39,26 +36,25 @@ impl Operation<Postgres> for CTAsistenciaEventosO {
     }
 }
 
-pub(crate) struct CTAsistenciaEventosM;
+pub(crate) struct CTAsistenciaDataM;
 
 #[async_trait::async_trait]
-impl Migration<Postgres> for CTAsistenciaEventosM {
+impl Migration<Postgres> for CTAsistenciaDataM {
     fn app(&self) -> &str {
-        "0006"
+        "0004"
     }
 
     fn name(&self) -> &str {
-        "0006"
+        "0004"
     }
 
     fn parents(&self) -> Vec<Box<dyn Migration<Postgres>>> {
         vec![
-          Box::new(CTEventosM),
-          Box::new(CTEventosInvitadosM),
+          Box::new(CTVisitanteM),
         ]
     }
 
     fn operations(&self) -> Vec<Box<dyn Operation<Postgres>>> {
-        vec![Box::new(CTAsistenciaEventosO)]
+        vec![Box::new(CTAsistenciaDataO)]
     }
 }

@@ -13,8 +13,12 @@ impl Operation<Postgres> for CTVisitanteO {
         println!("visitant");
         sqlx::query(
             "CREATE TABLE visitante (
-                id INT NOT NULL,
-                CONSTRAINT visitante_pkey PRIMARY KEY (id)
+                visitante_id SERIAL PRIMARY KEY,
+                visitante_matricula INT,
+                visitante_nombre VARCHAR(255),
+                visitante_carrera VARCHAR(30),
+                visitante_genero VARCHAR(50),
+                visitante_semestre INT
             );",
         )
         .execute(connection)

@@ -4,8 +4,9 @@ use sqlx_migrator::operation::Operation;
 // Its better to use sqlx imported from sqlx_migrator
 use sqlx_migrator::sqlx;
 
+use super::create_table_asistencia_data::CTAsistenciaDataM;
+use super::create_table_eventos::CTEventosM;
 use super::create_table_sala::CTSalaM;
-use super::create_table_visitant::CTVisitanteM;
 
 pub(crate) struct CTAsistenciaO;
 
@@ -16,14 +17,13 @@ impl Operation<Postgres> for CTAsistenciaO {
         println!("asistencia");
         sqlx::query(
             "CREATE TABLE asistencia (
-                id serial4 NOT NULL,
-                sala_id int4 NULL,
-                visitante_id int4 NULL,
-                entrada int8 NOT NULL,
-                salida int8 NULL,
-                CONSTRAINT asistencia_pkey PRIMARY KEY (id),
-                CONSTRAINT fk_sala FOREIGN KEY (sala_id) REFERENCES sala(id),
-                CONSTRAINT fk_visitante FOREIGN KEY (visitante_id) REFERENCES visitante(id)
+                asistencia_id SERIAL PRIMARY KEY,
+                asistencia_sala_id INT,
+                asistencia_evento_id INT,
+                asistencia_asistencia_data_id INT,
+                CONSTRAINT fk_asistencia_asistencia_id FOREIGN KEY (asistencia_asistencia_data_id) REFERENCES asistencia_data(asistencia_data_id),
+                CONSTRAINT fk_asistencia_sala_id FOREIGN KEY (asistencia_sala_id) REFERENCES sala(sala_id),
+                CONSTRAINT fk_asistencia_evento_id FOREIGN KEY (asistencia_evento_id) REFERENCES eventos(evento_id)
             );",
         )
         .execute(connection)
@@ -45,17 +45,18 @@ pub(crate) struct CTAsistenciaM;
 #[async_trait::async_trait]
 impl Migration<Postgres> for CTAsistenciaM {
     fn app(&self) -> &str {
-        "0003"
+        "0005"
     }
 
     fn name(&self) -> &str {
-        "0003"
+        "0005"
     }
 
     fn parents(&self) -> Vec<Box<dyn Migration<Postgres>>> {
         vec![
+            Box::new(CTAsistenciaDataM),
             Box::new(CTSalaM),
-            Box::new(CTVisitanteM)
+            Box::new(CTEventosM),
             ]
     }
 

@@ -13,10 +13,9 @@ impl Operation<Postgres> for CTSalaO {
         println!("sala");
         sqlx::query(
             "CREATE TABLE sala (
-                id serial4 NOT NULL,
-                piso int4 NULL,
-                nombre varchar(255) NULL,
-                CONSTRAINT sala_pkey PRIMARY KEY (id)
+                sala_id serial PRIMARY KEY,
+                sala_piso int4 NULL,
+                sala_nombre varchar(255) NULL
             );",
         )
         .execute(connection)

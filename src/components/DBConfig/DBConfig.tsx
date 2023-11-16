@@ -17,7 +17,7 @@ const DBConfig: Component = () => {
     if(verify) {
       data = await readTextFile("config.json", { dir: BaseDirectory.AppLocalData });
     } else {
-      console.log("Creating default config.json in AppData folder");
+      console.log("Creando archivo config.json de default en carpeta AppData/tpoo")
       await writeFile("config.json", JSON.stringify(TempDatabaseCredentials()), {dir: BaseDirectory.AppLocalData});
       data = await readTextFile("config.json", { dir: BaseDirectory.AppLocalData });
     }
@@ -35,7 +35,7 @@ const DBConfig: Component = () => {
         invoke("run_migrations")
         .then(res => {
           if(res) {
-            console.log("All migrations have been applied!")
+            console.log("Todas las migraciones han sido aplicadas!")
             setDatabaseCredentials(TempDatabaseCredentials())
             navigate("/attendance")
           }
@@ -61,7 +61,7 @@ const DBConfig: Component = () => {
           invoke("run_migrations")
             .then(res => {
               if(res) {
-                console.log("All migrations have been applied!")
+                console.log("Todas las migraciones han sido aplicadas!")
                 navigate("/attendance")
               }
             })
