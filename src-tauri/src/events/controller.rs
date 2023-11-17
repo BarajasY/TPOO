@@ -126,8 +126,10 @@ pub async fn add_invitado(
   let guard = state.lock().await;
   let db_pool = guard.as_ref().unwrap();
 
+  let visitante = get_visitante(db_pool, id).await;
+
   let verify = sqlx::query("select * from eventos_invitados where visitante_id= $1 and eventos_id = $2")
-    .bind(id)
+    .bind(visitante.visitante_id)
     .bind(evento_id)
     .fetch_optional(db_pool)
     .await
@@ -135,7 +137,7 @@ pub async fn add_invitado(
 
   if verify.is_none() {
       let query = sqlx::query("insert into eventos_invitados (visitante_id, eventos_id) values ($1, $2);")
-        .bind(id)
+        .bind(visitante.visitante_id)
         .bind(evento_id)
         .execute(db_pool)
         .await
@@ -156,6 +158,7 @@ pub async fn add_event_registration(
   let pool = guard.as_ref().unwrap();
 
   let visitante = get_visitante(pool, data.evento_invitados_id).await;
+  check_invitado(pool, visitante.visitante_id, data.evento_id).await;
 
   let verify = sqlx::query(
     "SELECT * FROM asistencia_data WHERE visitante_id = $1 AND salida IS NULL",
@@ -197,7 +200,7 @@ pub async fn add_event_registration(
       Ok(answer)
     }
   } else {
-    let verify_id: i32 = verify.unwrap().get("id");
+    let verify_id: i32 = verify.unwrap().get("visitante_id");
     let row = sqlx::query("update asistencia_data set salida = $1 where visitante_id = $2")
       .bind(data.fecha)
       .bind(verify_id)
@@ -218,5 +221,27 @@ pub async fn add_event_registration(
       answer.message = "Failure".to_string();
       Ok(answer)
     }
+  }
+}
+
+pub async fn check_invitado(pool: &PgPool, invitado_id: i32, evento_id: i32) -> bool {
+  let verify = sqlx::query("select * from eventos_invitados where visitante_id= $1 and eventos_id = $2")
+    .bind(invitado_id)
+    .bind(evento_id)
+    .fetch_optional(pool)
+    .await
+    .unwrap();
+
+  if verify.is_none() {
+      let query = sqlx::query("insert into eventos_invitados (visitante_id, eventos_id) values ($1, $2);")
+        .bind(invitado_id)
+        .bind(evento_id)
+        .execute(pool)
+        .await
+        .unwrap();
+
+      query.rows_affected() > 0
+  } else {
+      false
   }
 }

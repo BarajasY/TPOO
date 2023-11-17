@@ -29,7 +29,7 @@ impl Operation<Postgres> for CTAsistenciaDataO {
 
     // down migration runs down migration
     async fn down(&self, connection: &mut PgConnection) -> Result<(), Error> {
-        sqlx::query("DROP TABLE asistencia_eventos;")
+        sqlx::query("DROP TABLE asistencia_data;")
             .execute(connection)
             .await?;
         Ok(())

@@ -14,6 +14,7 @@ import TopRightContainer from "../../utils/TopRightContainer/TopRightContainer";
 import { RegisterResponse } from "../../../types";
 //signals
 import { CurrentEvent } from "../../../sharedSignals";
+import InputCaution from "../../utils/inputCaution/InputCaution";
 
 const EventsAttendance = () => {
   const navigator = useNavigate()
@@ -58,10 +59,12 @@ const EventsAttendance = () => {
 
         <div class="content">
           <p>Ingrese su matrícula</p>
+          <InputCaution />
           <input
             type="number"
             pattern="<[0-9]+>"
             placeholder="Ej. 2128081"
+            onKeyPress={(e) => e.key === 'Enter' ? submit() : null}
             oninput={(e) => setId(Number(e.target.value))}/>
           <button onClick={() => submit()}>Enviar</button>
         </div>

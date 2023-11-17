@@ -13,7 +13,8 @@ pub struct DBCredentials {
     db_user: String,
     db_port: i32,
     db_name: String,
-    db_pass: String
+    db_pass: String,
+    db_table: String
 }
 
 #[tauri::command]
@@ -67,4 +68,18 @@ pub async fn revert_migrations(state: State<Mutex<Option<PgPool>>, '_>) -> Resul
     println!("Successfully reverted all migrations");
 
     Ok(true)
+}
+
+#[tauri::command]
+pub async fn change_sala_name(state: State<Mutex<Option<PgPool>>, '_>, name: String) -> Result<bool, ()> {
+    let guard = state.lock().await;
+    let pool = guard.as_ref().unwrap();
+
+    let query = sqlx::query("update sala set sala_nombre = $1 where sala_id = 1")
+        .bind(name)
+        .execute(pool)
+        .await
+        .unwrap();
+
+    Ok(query.rows_affected() > 0)
 }

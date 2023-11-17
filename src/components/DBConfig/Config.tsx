@@ -37,7 +37,8 @@ const Config: Component = () => {
               db_host: "",
               db_port: 0,
               db_pass: "placeholder",
-              db_user: ""
+              db_user: "",
+              db_table: ""
             })
             await writeFile("config.json", JSON.stringify(TempDatabaseCredentials()), { dir: BaseDirectory.AppLocalData })
             setErrorMessage(true);

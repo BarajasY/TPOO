@@ -13,7 +13,7 @@ impl Operation<Postgres> for ASalaRO {
     async fn up(&self, connection: &mut PgConnection) -> Result<(), Error> {
         println!("sala_add");
         sqlx::query(
-            "INSERT INTO sala (sala_id, sala_piso, sala_nombre) VALUES (1, 1, 'Biblioteca piso 1');",
+            "INSERT INTO sala (sala_id, sala_piso, sala_nombre) VALUES (1, 1, 'Hemeroteca');",
         )
         .execute(connection)
         .await?;

@@ -22,6 +22,8 @@ sqlx_migrator = { version = "0.9.2", features= ["postgres"] }
 tokio = { version = "1", features = ["full"] }
 async-trait = "0.1.74"
 tauri-plugin-log = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "v1" }
+rust_xlsxwriter = "0.54.0"
+chrono = "0.4.31"
 
 [features]
 # this feature is used for production builds or when `devPath` points to the filesystem

@@ -1,0 +1,12 @@
+.input-caution {
+  text-align: center;
+
+  p {
+    color: var(--error);
+
+    span {
+      font-size: var(--fs4);
+      font-family: 'Courier New', Courier, monospace;
+    }
+  }
+}

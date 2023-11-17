@@ -41,7 +41,8 @@ export type DBConfigInterface = {
   db_port: number,
   db_user: string,
   db_pass: string,
-  db_host:string
+  db_host:string,
+  db_table: string
 }
 
 export type Evento = {

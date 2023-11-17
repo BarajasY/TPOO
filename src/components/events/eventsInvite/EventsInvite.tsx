@@ -9,6 +9,7 @@ import { CurrentEvent, QueryStateEnum } from "../../../sharedSignals";
 import { Motion } from "@motionone/solid";
 import TopText from "../../utils/topText/TopText";
 import TopRightContainer from "../../utils/TopRightContainer/TopRightContainer";
+import InputCaution from "../../utils/inputCaution/InputCaution";
 
 const EventsInvite = () => {
   const params = useParams();
@@ -22,10 +23,10 @@ const EventsInvite = () => {
   const [QueryState, setQueryState] = createSignal<QueryState>()
 
   const submit = () => {
-    invoke('add_invitado', {id: Id(), eventoId: Number(params.id)})
+    invoke('add_invitado', { id: Id(), eventoId: Number(params.id) })
       .then(d => {
-        if(d) {
-          setQueryState({type: QueryStateEnum.Success, message: 'Invitado agregado!'})
+        if (d) {
+          setQueryState({ type: QueryStateEnum.Success, message: 'Invitado agregado!' })
         } else {
           setQueryState({
             type: QueryStateEnum.Error,
@@ -47,13 +48,14 @@ const EventsInvite = () => {
       <TopText text={CurrentEvent()?.nombre} />
 
       <p class="label">Añadir invitado</p>
-      <p class="disclaimer">En caso de no contar con matrícula escribir 0 ó dejar en blanco</p>
+      <InputCaution />
       <input
         type="number"
         placeholder="Ej. 2128081"
         class="input"
+        onKeyPress={(e) => e.key === 'Enter' ? submit() : null}
         oninput={(e) => setId(Number(e.target.value))}
-        />
+      />
       <button class="submit" onclick={() => submit()}>Enviar</button>
 
       <Show when={QueryState()}>

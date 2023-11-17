@@ -23,6 +23,9 @@
         "exists": true,
         "readFile": true,
         "scope": ["$LOCALDATA/tpoo/", "$LOCALDATA/tpoo/*"]
+      },
+      "path": {
+        "all": true
       }
     },
     "bundle": {

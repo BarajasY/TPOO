@@ -1,13 +1,12 @@
-import { For, Match, Switch, createSignal, onMount } from "solid-js";
+import { For, Match, Switch, onMount } from "solid-js";
 import "./attendance.scss";
 import { invoke } from "@tauri-apps/api";
 import { Sala } from "../../types";
 import { IsSalaSelected, setCurrentSalaId, setCurrentSalaName, setIsSalaSelected } from "./attendanceState";
 import ARegister from "../attendanceRegister/ARegister";
-import { setAttendanceData } from "../../sharedSignals";
+import { Salas, setAttendanceData, setSalas } from "../../sharedSignals";
 
 const Attendance = () => {
-  const [Salas, setSalas] = createSignal<Sala[]>([]);
 
   onMount(async () => {
     invoke("get_salas").then((salas) => {

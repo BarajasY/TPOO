@@ -1,0 +1,16 @@
+.open-folder {
+  button {
+    margin: 5px;
+    padding: 10px;
+    border-radius: 5px;
+    background: var(--main-1);
+    color: var(--main-2);
+    transition: .2s;
+    font-size: var(--fs3);
+
+    &:hover {
+      background: var(--main-2);
+      color: var(--main-1);
+    }
+  }
+}

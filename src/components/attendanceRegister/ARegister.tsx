@@ -8,6 +8,7 @@ import { RegisterResponse } from "../../types";
 //@ts-ignore
 import { Motion, Presence } from "@motionone/solid"
 import TopText from "../utils/topText/TopText";
+import InputCaution from "../utils/inputCaution/InputCaution";
 
 const ARegister: Component = () => {
 
@@ -67,10 +68,12 @@ const ARegister: Component = () => {
       <div class="content">
         <TopText text={currentSalaName()}/>
         <h1 class="text">Escriba su matrícula</h1>
+        <InputCaution />
         <input
           type="number"
           class="mat_input"
           pattern="[0-9]+"
+          onKeyPress={(e) => e.key === 'Enter' ? submitAttendance() : null}
           oninput={(e) => setMatricula(Number(e.target.value))} />
         <button class="send-button" onclick={() => submitAttendance()}>Enviar</button>
       </div>

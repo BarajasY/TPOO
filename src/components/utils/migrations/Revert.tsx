@@ -1,5 +1,5 @@
 import { invoke } from "@tauri-apps/api";
-import "./Apply.scss";
+import "./Revert.scss";
 import { createSignal } from "solid-js";
 //@ts-ignore
 import {createMotion} from "@motionone/solid";
@@ -9,7 +9,7 @@ const Revert = () => {
 
   const [Success, setSuccess] = createSignal<boolean>(false)
 
-  const applyMigrations = () => {
+  const revertMigrations = () => {
     invoke('revert_migrations').then(res => {
       setSuccess(res as boolean);
       //animation stuffs
@@ -28,8 +28,8 @@ const Revert = () => {
   }
 
   return (
-    <div class="apply-button">
-      <button onClick={() => applyMigrations()}>
+    <div class="revert-button">
+      <button onClick={() => revertMigrations()}>
         Revertir Migraciones
       </button>
       <div

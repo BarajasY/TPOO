@@ -1,4 +1,4 @@
-import { BaseDirectory, readTextFile, writeFile, exists } from "@tauri-apps/api/fs";
+import { BaseDirectory, readTextFile, writeFile, exists, createDir } from "@tauri-apps/api/fs";
 import { Component, Show, createSignal, onMount } from "solid-js";
 import "./DBConfig.scss";
 import { DatabaseCredentials, TempDatabaseCredentials, setDatabaseCredentials, setTempDatabaseCredentials } from "../../sharedSignals";
@@ -12,6 +12,9 @@ const DBConfig: Component = () => {
   const [ErrorMessage, setErrorMessage] = createSignal<boolean>(false);
 
   onMount(async () => {
+    if(!await exists("excel", {dir: BaseDirectory.AppLocalData})) {
+      await createDir('excel', {dir: BaseDirectory.AppLocalData});
+    }
     let verify = await exists("config.json", {dir: BaseDirectory.AppLocalData});
     let data;
     if(verify) {
@@ -35,9 +38,14 @@ const DBConfig: Component = () => {
         invoke("run_migrations")
         .then(res => {
           if(res) {
-            console.log("Todas las migraciones han sido aplicadas!")
-            setDatabaseCredentials(TempDatabaseCredentials())
-            navigate("/attendance")
+            invoke('change_sala_name', {name: DatabaseCredentials()?.db_table})
+            .then(res => {
+              if(res) {
+                console.log("Todas las migraciones han sido aplicadas!")
+                setDatabaseCredentials(TempDatabaseCredentials())
+                navigate("/attendance")
+              }
+            })
           }
         })
       } else {
@@ -46,7 +54,8 @@ const DBConfig: Component = () => {
           db_host: "",
           db_port: 0,
           db_pass: "placeholder",
-          db_user: ""
+          db_user: "",
+          db_table: ""
         })
         await writeFile("config.json", JSON.stringify(TempDatabaseCredentials()), {dir: BaseDirectory.AppLocalData})
         setErrorMessage(true);
@@ -61,8 +70,13 @@ const DBConfig: Component = () => {
           invoke("run_migrations")
             .then(res => {
               if(res) {
-                console.log("Todas las migraciones han sido aplicadas!")
-                navigate("/attendance")
+                invoke('change_sala_name', {name: DatabaseCredentials()?.db_table})
+                .then(res => {
+                  if(res) {
+                    console.log("Todas las migraciones han sido aplicadas!")
+                    navigate("/attendance")
+                  }
+                })
               }
             })
         }

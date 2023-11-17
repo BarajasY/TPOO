@@ -9,6 +9,7 @@ mod attendency;
 mod db;
 mod migrations;
 mod events;
+mod xlsx;
 
 // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
 #[tauri::command]
@@ -35,6 +36,7 @@ async fn main() {
             db::make_database,
             db::run_migrations,
             db::revert_migrations,
+            db::change_sala_name,
             attendency::controller::get_salas,
             attendency::controller::add_registration,
             attendency::controller::get_statistics_by_date,
@@ -43,7 +45,8 @@ async fn main() {
             events::controller::add_event,
             events::controller::get_event_by_id,
             events::controller::add_invitado,
-            events::controller::add_event_registration
+            events::controller::add_event_registration,
+            xlsx::controller::make_xlsx
         ])
         .run(tauri::generate_context!())
         .unwrap();

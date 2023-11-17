@@ -6,6 +6,10 @@ const DBForm: Component = () => {
   return (
     <div>
       <div class="input-text-container">
+        <p class="label">Sala</p>
+        <input type="text" class="input" placeholder="Ej. Hemeroteca" oninput={(e) => setTempDatabaseCredentials(dc => ({...dc!, db_table: e.target.value}))} />
+      </div>
+      <div class="input-text-container">
         <p class="label">Puerto</p>
         <input type="number" class="input" placeholder="Ej. 1402" oninput={(e) => setTempDatabaseCredentials(dc => ({...dc!, db_port:Number(e.target.value)}))} />
       </div>
